@@ -15,13 +15,13 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {list: [] };    
+    this.state = {list: [] , newList: []};    
     this.changeList= this.changeList.bind(this);
   }
 
 
   changeList(val){
-    this.setState({list: val});
+    this.setState({newList: val});
   }
 
 componentDidMount(){
@@ -35,6 +35,7 @@ componentDidMount(){
     .then(function (respJson) {
       let val=respJson.Reggae;
        that.setState({list: val});
+       that.setState({newList: val});
        //console.log(that.state);
     })
 
@@ -42,6 +43,8 @@ componentDidMount(){
 
   render() {
     let list =this.state.list;
+    let newList =this.state.newList;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -49,9 +52,9 @@ componentDidMount(){
         </header>
         <br/>
         
-        <Search list={this.state.list} changeList={this.changeList} />
+        <Search list={list} changeList={this.changeList} />
         <ul>
-        {list.map(function(curr, index, arr){
+        {newList.map(function(curr, index, arr){
           return <li key={index} >{curr}</li> 
         })} 
         </ul>
